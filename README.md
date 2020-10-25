@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/iitis/MatrixEnsembles.jl.svg?branch=master)](https://travis-ci.org/iitis/MatrixEnsembles.jl)
+[![Coverage Status](https://coveralls.io/repos/github/iitis/MatrixEnsembles.jl/badge.svg?branch=master)](https://coveralls.io/github/iitis/MatrixEnsembles.jl?branch=master)
 # MatrixEnsembles.jl
 
 ## Sampling random matrices on the GPU
