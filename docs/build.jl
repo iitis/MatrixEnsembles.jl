@@ -15,7 +15,7 @@ cd(dirname(@__FILE__)) do
         end
     end
     # also execute examples
-    include("../examples/ex1.jl")
+    # include("../examples/ex1.jl")
 
     # Generate and save the contents of docstrings as markdown files.
     index  = Index()

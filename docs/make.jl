@@ -8,7 +8,7 @@ makedocs(
     clean = true,
     format = format,
     sitename = "MatrixEnsembles.jl",
-    authors = "Piotr Gawron, Dariusz Kurzyk, Łukasz Pawela",
+    authors = "Łukasz Pawela",
     assets = ["assets/favicon.ico"],
     pages = [
         "Home" => "index.md",
