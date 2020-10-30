@@ -2,6 +2,8 @@ module MatrixEnsembles
 using LinearAlgebra
 import Base: rand, size
 using Random: GLOBAL_RNG, AbstractRNG
+using Requires
+
 
 export rand, size, QIContinuousMatrixDistribution
 
