@@ -6,7 +6,7 @@ using Requires
 
 
 export rand, size, QIContinuousMatrixDistribution
-
+export curand
 abstract type QIContinuousMatrixDistribution; end
 
 rand(c::QIContinuousMatrixDistribution) = rand(GLOBAL_RNG, c)
@@ -26,7 +26,6 @@ function __init__()
             const CuQR = CUDA.CUSOLVER.CuQR
 
             # CUDA.allowscalar(false)
-            export curand
             include("cuda/circular.jl") 
             include("cuda/ginibre.jl")
             include("cuda/wigner.jl")
