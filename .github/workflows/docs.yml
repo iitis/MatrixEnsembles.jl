@@ -15,7 +15,7 @@ jobs:
         with:
           version: 1.4
       - name: install Documenter
-        run: julia --project=docs/ -e 'using Pkg; Pkg.add("SCS"); Pkg.add("Documenter")'
+        run: julia --project=docs/ -e 'using Pkg; Pkg.add("MatrixEnsembles"); Pkg.add("Documenter")'
       - name: build and deploy
         run: julia --project=docs/ docs/make.jl
         env:
