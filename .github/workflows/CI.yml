@@ -12,7 +12,6 @@ jobs:
         version:
           - '1.0'
           - '1.5'
-          - 'nightly'
         os:
           - ubuntu-latest
           - macOS-latest
@@ -37,7 +36,7 @@ jobs:
             ${{ runner.os }}-
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
-      
+
   docs:
     name: Documentation
     runs-on: ubuntu-latest
