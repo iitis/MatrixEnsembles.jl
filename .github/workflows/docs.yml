@@ -14,8 +14,9 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: 1.4
-      - name: build and deploy
+      - name: install Documenter
         run: julia --project=docs/ -e 'using Pkg; Pkg.add("SCS"); Pkg.add("Documenter")'
+      - name: build and deploy
         run: julia --project=docs/ docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
