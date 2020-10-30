@@ -49,6 +49,8 @@ jobs:
           julia --project=docs -e '
             using Pkg
             Pkg.develop(PackageSpec(path=pwd()))
+            Pkg.add("Documenter")
+            Pkg.add("DocumenterGitHubActions")
             Pkg.instantiate()'
       - run: |
           julia --project=docs -e '
