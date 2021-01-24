@@ -25,7 +25,7 @@ function __init__()
             const CuSVD = CUDA.CUSOLVER.CuSVD
             const CuQR = CUDA.CUSOLVER.CuQR
 
-            # CUDA.allowscalar(false)
+            CUDA.allowscalar(false)
             include("cuda/circular.jl") 
             include("cuda/ginibre.jl")
             include("cuda/wigner.jl")

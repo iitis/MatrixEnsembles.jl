@@ -3,7 +3,6 @@ Random.seed!(42)
 @testset "GinibreEnsemble" begin
     g = GinibreEnsemble{1}(10, 20)
     z = curand(g)
-    @show typeof(z)
     @test typeof(z) <: CuArray
     @test eltype(z) <: Real
     @test size(z) == (10, 20)

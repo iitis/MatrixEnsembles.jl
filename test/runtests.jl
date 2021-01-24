@@ -1,6 +1,6 @@
 using Test
 using CUDA
-
+CUDA.allowscalar(false)
 using Random
 using StatsBase
 using LinearAlgebra
