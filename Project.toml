@@ -12,7 +12,7 @@ Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
-CUDA = "2.0, 4"
+CUDA = "4"
 DocStringExtensions = "0.8.3"
 Requires = "1.1"
 StatsBase = "0.33.2"
