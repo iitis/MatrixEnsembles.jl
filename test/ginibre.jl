@@ -1,6 +1,6 @@
 Random.seed!(42)
 
-@testset "GinibreEnsemble" begin
+@testset verbose=true "GinibreEnsemble" begin
     g = GinibreEnsemble{1}(10, 20)
     z = rand(g)
     @test eltype(z) <: Real
@@ -14,7 +14,7 @@ Random.seed!(42)
     @test size(z) == (20, 40)
     @test eltype(z) == ComplexF64
 
-@testset "_qr_fix" begin
+@testset verbose=true "_qr_fix" begin
     a = rand(2, 2)
     u1 = MatrixEnsembles._qr_fix(a)
     u2 = MatrixEnsembles._qr_fix!(a)

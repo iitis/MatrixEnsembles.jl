@@ -23,5 +23,9 @@ function rand(rng::AbstractRNG, g::GinibreEnsemble{4})
     q1 = randn(rng, g.m, g.n)
     q2 = randn(rng, g.m, g.n)
     q3 = randn(rng, g.m, g.n)
-    [q0+1im*q1 q2+1im*q3; -q2+1im*q3 q0-1im*q1]
+    
+    # Generic block construction
+    r1 = hcat(q0 + 1im*q1, q2 + 1im*q3)
+    r2 = hcat(-q2 + 1im*q3, q0 - 1im*q1)
+    vcat(r1, r2)
 end

@@ -1,6 +1,6 @@
 Random.seed!(42)
 
-@testset "WishartEnsemble" begin
+@testset verbose=true "CUDA: WishartEnsemble" begin
     w = WishartEnsemble{1, 0.1}(10)
     z = curand(w)
     ev, _ = CUDA.CUSOLVER.syevd!('V', 'U', copy(z))

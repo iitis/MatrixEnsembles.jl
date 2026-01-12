@@ -15,13 +15,50 @@ const COE = CircularEnsemble{1}
 const CUE = CircularEnsemble{2}
 const CSE = CircularEnsemble{4}
 
+@kernel function identity_kernel!(A)
+    I, J = @index(Global, NTuple)
+    A[I, J] = I == J ? 1 : 0
+end
+
+@kernel function symplectic_kernel!(A)
+    I, J = @index(Global, NTuple)
+    # Check if we are in the same 2x2 block diagonal
+    ki = (I - 1) ÷ 2
+    kj = (J - 1) ÷ 2
+    
+    if ki == kj
+        r = (I - 1) % 2
+        c = (J - 1) % 2
+        
+        if r == 0 && c == 1
+            A[I, J] = -1
+        elseif r == 1 && c == 0
+            A[I, J] = 1
+        else
+            A[I, J] = 0
+        end
+    else
+        A[I, J] = 0
+    end
+end
+
 function _qr_fix!(z::AbstractMatrix)
     q, r = qr!(z)
     d = diag(r)
     ph = d./abs.(d)
     idim = size(r, 1)
-    q = Matrix(q)[:, 1:idim]
-    q = transpose(ph) .* q
+    
+    # Generic densification: Use kernel to create identity
+    m = size(q, 1)
+    dest = similar(z, m, idim)
+    
+    backend = KernelAbstractions.get_backend(dest)
+    kernel = identity_kernel!(backend)
+    kernel(dest, ndrange=size(dest))
+    
+    q_dense = q * dest
+    
+    transpose(ph) .* q_dense
 end
 
 function _qr_fix(z::AbstractMatrix)
@@ -44,7 +81,12 @@ end
 function rand(rng::AbstractRNG, c::CSE)
     z = rand(rng, c.g)
     u = _qr_fix!(z)
-    ur = cat([[0 -1; 1 0] for _=1:c.d÷2]..., dims=[1,2])
+    
+    ur = similar(z, eltype(z), c.d, c.d)
+    backend = KernelAbstractions.get_backend(ur)
+    kernel = symplectic_kernel!(backend)
+    kernel(ur, ndrange=size(ur))
+    
     ur*u*ur'*transpose(u)
 end
 

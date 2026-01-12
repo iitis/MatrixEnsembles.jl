@@ -4,7 +4,7 @@
 
 ## Sampling random matrices on the GPU
 
-We have introduced an experimental implementation of sampling of random matrices and random quantum objects on the GPU. In order to use this feature, the `CUDA` package is required. To import `MatrixEnsembles` with GPU support use
+We have introduced an experimental implementation of sampling of random matrices and random quantum objects on the GPU using `KernelAbstractions.jl`. In order to use this feature, the `CUDA` package is required to load the necessary extension. To import `MatrixEnsembles` with GPU support use
 ```julia
 using CUDA, MatrixEnsembles
 ```

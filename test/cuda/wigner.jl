@@ -1,6 +1,6 @@
 Random.seed!(42)
 
-@testset "WignerEnsemble" begin
+@testset verbose=true "CUDA: WignerEnsemble" begin
     w = WignerEnsemble{1}(10)
     z = curand(w)
 
