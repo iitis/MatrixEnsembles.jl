@@ -7,7 +7,7 @@ using Random: GLOBAL_RNG, AbstractRNG
 export rand, size, QIContinuousMatrixDistribution
 export curand
 
-abstract type QIContinuousMatrixDistribution; end
+abstract type QIContinuousMatrixDistribution ; end
 
 rand(c::QIContinuousMatrixDistribution) = rand(GLOBAL_RNG, c)
 

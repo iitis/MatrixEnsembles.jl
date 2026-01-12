@@ -14,10 +14,10 @@ Random.seed!(42)
     @test size(z) == (20, 40)
     @test eltype(z) == ComplexF64
 
-@testset verbose=true "_qr_fix" begin
-    a = rand(2, 2)
-    u1 = MatrixEnsembles._qr_fix(a)
-    u2 = MatrixEnsembles._qr_fix!(a)
-    @test norm(u1 - u2) ≈ 0
-end
+    @testset verbose=true "_qr_fix" begin
+        a = rand(2, 2)
+        u1 = MatrixEnsembles._qr_fix(a)
+        u2 = MatrixEnsembles._qr_fix!(a)
+        @test norm(u1 - u2) ≈ 0
+    end
 end

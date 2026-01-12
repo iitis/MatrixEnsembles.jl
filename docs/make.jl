@@ -1,8 +1,9 @@
 using Documenter, MatrixEnsembles
 
-format = Documenter.HTML(edit_link = "master",
-                         prettyurls = get(ENV, "CI", nothing) == "true",
-                         assets = ["assets/favicon.ico"]
+format = Documenter.HTML(
+    edit_link = "master",
+    prettyurls = get(ENV, "CI", nothing) == "true",
+    assets = ["assets/favicon.ico"],
 )
 
 makedocs(
@@ -12,12 +13,9 @@ makedocs(
     authors = "Łukasz Pawela",
     pages = [
         "Home" => "index.md",
-        "Manual" => Any[
-            "man/quickstart.md",
-            "man/random.md"
-        ],
-        "Library" => "lib/MatrixEnsembles.md"
-    ]
+        "Manual" => Any["man/quickstart.md", "man/random.md"],
+        "Library" => "lib/MatrixEnsembles.md",
+    ],
 )
 
 # deploydocs(

@@ -12,13 +12,15 @@ Random.seed!(42)
         steps = 100
         r = zeros(steps, n)
 
-        for i=1:steps
+        for i = 1:steps
             u = rand(c)
             r[i, :] = angle.(eigvals(u))
         end
         r = vec(r)
-        h = normalize(fit(Histogram, r, weights(ones(size(r))), -π:0.1π:π, closed=:left))
-        @test all(isapprox.(h.weights, 1/2π, atol=0.01))
+        h = normalize(
+            fit(Histogram, r, weights(ones(size(r))), (-π):0.1π:π, closed = :left),
+        )
+        @test all(isapprox.(h.weights, 1/2π, atol = 0.01))
     end
 
     @testset verbose=true "COE" begin
@@ -31,13 +33,15 @@ Random.seed!(42)
         c = COE(n)
         steps = 100
         r = zeros(steps, n)
-        for i=1:steps
+        for i = 1:steps
             o = rand(c)
             r[i, :] = angle.(eigvals(o))
         end
         r = vec(r)
-        h = normalize(fit(Histogram, r, weights(ones(size(r))), -π:0.1π:π, closed=:left))
-        @test all(isapprox.(h.weights, 1/2π, atol=0.1))
+        h = normalize(
+            fit(Histogram, r, weights(ones(size(r))), (-π):0.1π:π, closed = :left),
+        )
+        @test all(isapprox.(h.weights, 1/2π, atol = 0.1))
     end
 
     @testset verbose=true "CircularRealEnsemble" begin
@@ -48,14 +52,14 @@ Random.seed!(42)
     end
 end
 
-    @testset verbose=true "HaarIsometry" begin
-        idim = 2
-        odim = 3
-        c = HaarIsometry(idim, odim)
-        u = rand(c)
-        @test size(u) == (odim, idim)
-        @test isapprox(norm(u'*u - I), 0, atol=1e-6)
-        @test_throws ArgumentError HaarIsometry(odim, idim)
+@testset verbose=true "HaarIsometry" begin
+    idim = 2
+    odim = 3
+    c = HaarIsometry(idim, odim)
+    u = rand(c)
+    @test size(u) == (odim, idim)
+    @test isapprox(norm(u'*u - I), 0, atol = 1e-6)
+    @test_throws ArgumentError HaarIsometry(odim, idim)
 
     @testset verbose=true "CSE" begin
         n = 10
@@ -69,6 +73,6 @@ end
         c = CircularQuaternionEnsemble(10)
         u = rand(c)
         @test size(u) == (20, 20)
-        @test isapprox(norm(u'*u - I), 0, atol=1e-12)
+        @test isapprox(norm(u'*u - I), 0, atol = 1e-12)
     end
 end

@@ -1,10 +1,10 @@
-export CircularEnsemble, COE, CUE, CSE, CircularRealEnsemble,
-    CircularQuaternionEnsemble, HaarIsometry
+export CircularEnsemble,
+    COE, CUE, CSE, CircularRealEnsemble, CircularQuaternionEnsemble, HaarIsometry
 struct CircularEnsemble{β} <: QIContinuousMatrixDistribution
     d::Int
     g::GinibreEnsemble{2}
 
-    function CircularEnsemble{β}(d::Int) where β
+    function CircularEnsemble{β}(d::Int) where {β}
         β == 4 && mod(d, 2) == 1 ? throw(ArgumentError("Dim must even")) : ()
         g = GinibreEnsemble{2}(d)
         new(d, g)
@@ -25,11 +25,11 @@ end
     # Check if we are in the same 2x2 block diagonal
     ki = (I - 1) ÷ 2
     kj = (J - 1) ÷ 2
-    
+
     if ki == kj
         r = (I - 1) % 2
         c = (J - 1) % 2
-        
+
         if r == 0 && c == 1
             A[I, J] = -1
         elseif r == 1 && c == 0
@@ -45,19 +45,19 @@ end
 function _qr_fix!(z::AbstractMatrix)
     q, r = qr!(z)
     d = diag(r)
-    ph = d./abs.(d)
+    ph = d ./ abs.(d)
     idim = size(r, 1)
-    
+
     # Generic densification: Use kernel to create identity
     m = size(q, 1)
     dest = similar(z, m, idim)
-    
+
     backend = KernelAbstractions.get_backend(dest)
     kernel = identity_kernel!(backend)
-    kernel(dest, ndrange=size(dest))
-    
+    kernel(dest, ndrange = size(dest))
+
     q_dense = q * dest
-    
+
     transpose(ph) .* q_dense
 end
 
@@ -81,12 +81,12 @@ end
 function rand(rng::AbstractRNG, c::CSE)
     z = rand(rng, c.g)
     u = _qr_fix!(z)
-    
+
     ur = similar(z, eltype(z), c.d, c.d)
     backend = KernelAbstractions.get_backend(ur)
     kernel = symplectic_kernel!(backend)
-    kernel(ur, ndrange=size(ur))
-    
+    kernel(ur, ndrange = size(ur))
+
     ur*u*ur'*transpose(u)
 end
 
