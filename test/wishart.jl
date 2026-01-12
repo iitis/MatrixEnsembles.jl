@@ -1,6 +1,6 @@
 Random.seed!(42)
 
-@testset "WishartEnsemble" begin
+@testset verbose=true "WishartEnsemble" begin
     w = WishartEnsemble{1, 0.1}(10)
     z = rand(w)
     ev = eigvals(z)

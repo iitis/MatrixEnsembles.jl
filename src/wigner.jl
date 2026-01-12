@@ -15,5 +15,7 @@ WignerEnsemble(d::Int) = WignerEnsemble{2}(d)
 
 function rand(rng::AbstractRNG, w::WignerEnsemble{β}) where β
     z = rand(rng, w.g)
-    (z + z') / 2sqrt(2β * w.d)
+    T = real(eltype(z))
+    (z + z') / sqrt(T(2β * w.d)) / 2 # /2 outside sqrt for matching original code: 2sqrt(...) -> 2*sqrt(...)
+    # Original: (z + z') / 2sqrt(2β * w.d) = (z+z') / (2 * sqrt(...))
 end

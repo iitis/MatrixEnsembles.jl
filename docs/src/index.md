@@ -20,7 +20,8 @@ states,
 * manipulating them with quantum channels
 * calculating functionals on these objects, *i.e. trace norm, diamond norm, entropy, fidelity*,
 * application of random matrix theory in quantum
-information processing.
+information processing,
+* random matrix sampling on GPU.
 
 ## [References](@id refs)
 

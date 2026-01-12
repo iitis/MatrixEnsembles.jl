@@ -16,7 +16,8 @@ end
  WishartEnsemble(d::Int) = WishartEnsemble{2}(d)
 
 function rand(rng::AbstractRNG, w::WishartEnsemble{β, K}) where {β, K}
-    
-    z = rand(rng, w.g)/sqrt(2β * w.d)
+    z = rand(rng, w.g)
+    T = real(eltype(z))
+    z = z / sqrt(T(2β * w.d))
     z*z'
 end

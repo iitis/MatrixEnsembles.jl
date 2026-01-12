@@ -1,6 +1,6 @@
 Random.seed!(42)
 
-@testset "GinibreEnsemble" begin
+@testset verbose=true "CUDA: GinibreEnsemble" begin
     g = GinibreEnsemble{1}(10, 20)
     z = curand(g)
     @test typeof(z) <: CuArray
@@ -15,7 +15,7 @@ Random.seed!(42)
     @test size(z) == (20, 40)
     @test eltype(z) == ComplexF32
 
-@testset "_qr_fix" begin
+@testset verbose=true "CUDA: _qr_fix" begin
     a = CUDA.rand(2, 2)
     u1 = MatrixEnsembles._qr_fix(a)
     u2 = MatrixEnsembles._qr_fix!(a)

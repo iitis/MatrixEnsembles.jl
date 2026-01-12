@@ -159,6 +159,24 @@ o*o'
 ```
 For convenience we provide the following type aliases `const COE = CircularEnsemble{1}`, `const CUE = CircularEnsemble{2}`, `const CSE = CircularEnsemble{4}`.
 
+## GPU Sampling
+
+`MatrixEnsembles.jl` supports sampling random matrices directly on the GPU using `CUDA.jl`. This functionality is provided via a package extension that is loaded automatically when `CUDA` is imported.
+
+To use GPU sampling:
+```julia
+using CUDA
+using MatrixEnsembles
+
+# Create an ensemble (e.g., Circular Unitary Ensemble)
+c = CUE(1024)
+
+# Sample directly to a CuArray
+u = MatrixEnsembles.curand(c)
+```
+
+The `curand` function mimics `rand` but uses the `CUDA.default_rng()` and optimized kernels (implemented with `KernelAbstractions.jl`) to generate matrices directly on the device, minimizing host-device data transfer.
+
 ## [References](@id refs_rand)
 
 [1] B. Collins, I. Nechita, *Random matrix techniques in quantum information theory*, Journal of Mathematical Physics, 2016;57(1):015215.

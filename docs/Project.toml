@@ -1,0 +1,9 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+MatrixEnsembles = "c7015dd7-3fb7-4a4c-827e-526313618491"
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+
+[compat]
+Documenter = "1"
+MatrixEnsembles = "0.1, 0.2"
+CUDA = "5"

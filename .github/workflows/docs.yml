@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@latest
         with:
-          version: 1.4
+          version: 1.12
       - name: install Documenter
         run: julia --project=docs/ -e 'using Pkg; Pkg.add("MatrixEnsembles"); Pkg.add("Documenter")'
       - name: build and deploy
